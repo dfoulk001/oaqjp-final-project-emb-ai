@@ -11,11 +11,14 @@ def index():
 def handle_emotion():
     if request.method == 'POST':
         data = request.get_json()
-        text_to_analyze = data.get('text', '')
+        # We keep 'text' as the key because that is what the frontend sends
+        text_to_analyse = data.get('text', '')
     else:
-        text_to_analyze = request.args.get('textToAnalyze', '')
+        # We keep 'textToAnalyze' here because that is the specific parameter 
+        # name used in your URL query string from the browser.
+        text_to_analyse = request.args.get('textToAnalyze', '')
 
-    result = emotion_detector(text_to_analyze)
+    result = emotion_detector(text_to_analyse)
 
     # Task 7 Error Handling
     if result['dominant_emotion'] is None:
@@ -38,4 +41,3 @@ def handle_emotion():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-
