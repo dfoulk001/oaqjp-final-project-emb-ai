@@ -15,11 +15,12 @@ def handle_emotion():
     """Process text input and return formatted emotion scores or an error message."""
     if request.method == 'POST':
         data = request.get_json()
-        text_to_analyze = data.get('text', '')
+        text_to_analyse = data.get('text', '')
     else:
-        text_to_analyze = request.args.get('textToAnalyze', '')
+        # We keep the URL parameter name as is to maintain frontend compatibility
+        text_to_analyse = request.args.get('textToAnalyze', '')
 
-    result = emotion_detector(text_to_analyze)
+    result = emotion_detector(text_to_analyse)
 
     if result['dominant_emotion'] is None:
         return "Invalid text! Please try again!"
