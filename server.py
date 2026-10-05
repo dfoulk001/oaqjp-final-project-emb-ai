@@ -1,0 +1,43 @@
+"""Module for serving the emotion detection web application."""
+
+from flask import Flask, request, render_template
+from EmotionDetection import emotion_detector
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    """Serve the main landing page of the application."""
+    return render_template('index.html')
+
+@app.route('/emotionDetector', methods=['GET', 'POST'])
+def handle_emotion():
+    """Process text input and return formatted emotion scores or an error message."""
+    if request.method == 'POST':
+        data = request.get_json()
+        text_to_analyze = data.get('text', '')
+    else:
+        text_to_analyze = request.args.get('textToAnalyze', '')
+
+    result = emotion_detector(text_to_analyze)
+
+    if result['dominant_emotion'] is None:
+        return "Invalid text! Please try again!"
+
+    a = result['anger']
+    d = result['disgust']
+    f = result['fear']
+    j = result['joy']
+    s = result['sadness']
+    dom = result['dominant_emotion']
+
+    response_sentence = (
+        f"For the given statement, the system response is "
+        f"'anger': {a}, 'disgust': {d}, 'fear': {f}, 'joy': {j} and "
+        f"'sadness': {s}. The dominant emotion is {dom}."
+    )
+
+    return response_sentence
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)

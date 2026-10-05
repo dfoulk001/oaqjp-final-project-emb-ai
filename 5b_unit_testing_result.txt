@@ -1,0 +1,11 @@
+theia@theiadocker-dfoulk001:/home/project/final_project$ python3 test_emotion_detection.py
+PASSED: 'I am glad this happened' -> joy
+PASSED: 'I am really mad about this' -> anger
+PASSED: 'I feel disgusted just hearing about this' -> disgust
+PASSED: 'I am so sad about this' -> sadness
+PASSED: 'I am really afraid that this will happen' -> feartheia@theiadocker-dfoulk001:/home/project/final_project$ python3 test_emotion_detection.py
+PASSED: 'I am glad this happened' -> joy
+PASSED: 'I am really mad about this' -> anger
+PASSED: 'I feel disgusted just hearing about this' -> disgust
+PASSED: 'I am so sad about this' -> sadness
+PASSED: 'I am really afraid that this will happen' -> fear
